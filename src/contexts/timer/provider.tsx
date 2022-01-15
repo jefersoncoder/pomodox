@@ -38,9 +38,11 @@ const TimerProvider = ({ children }: IProps) => {
 
   useEffect(() => {
     const timer = JSON.parse(localStorage.getItem("timer") as string);
-    setTimerFocus({ current: timer.focus, initial: timer.focus });
-    setTimerShort({ current: timer.short, initial: timer.short });
-    setTimerLong({ current: timer.long, initial: timer.long });
+    if (timer) {
+      setTimerFocus({ current: timer.focus, initial: timer.focus });
+      setTimerShort({ current: timer.short, initial: timer.short });
+      setTimerLong({ current: timer.long, initial: timer.long });
+    }
   }, []);
 
   useEffect(() => {
