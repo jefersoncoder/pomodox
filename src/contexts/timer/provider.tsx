@@ -38,11 +38,11 @@ const TimerProvider = ({ children }: IProps) => {
   // start
   useEffect(() => {
     if (isPlay && status === "focus") {
-      intervalRef.current = setInterval(decrementTimerFocus, 50);
+      intervalRef.current = setInterval(decrementTimerFocus, 1000);
     } else if (isPlay && status === "short") {
-      intervalRef.current = setInterval(decrementTimerShort, 50);
+      intervalRef.current = setInterval(decrementTimerShort, 1000);
     } else if (isPlay && status === "long") {
-      intervalRef.current = setInterval(decrementTimerLong, 50);
+      intervalRef.current = setInterval(decrementTimerLong, 1000);
     } else {
       clearInterval(intervalRef.current);
     }
