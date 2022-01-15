@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import TimerContext from "./contex";
+import alarm from "../../assets/alarm-clock.mp3";
 import { IProps, ITimer } from "./types";
 
 const TimerProvider = ({ children }: IProps) => {
@@ -35,6 +36,24 @@ const TimerProvider = ({ children }: IProps) => {
     setTimerLong((prev) => ({ ...prev, current: prev.current - 1 }));
   };
 
+  useEffect(() => {
+    const timer = JSON.parse(localStorage.getItem("timer") as string);
+    setTimerFocus({ current: timer.focus, initial: timer.focus });
+    setTimerShort({ current: timer.short, initial: timer.short });
+    setTimerLong({ current: timer.long, initial: timer.long });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "timer",
+      JSON.stringify({
+        focus: timerFocus.initial,
+        short: timerShort.initial,
+        long: timerLong.initial,
+      })
+    );
+  }, [timerFocus.initial, timerLong.initial, timerShort]);
+
   // start
   useEffect(() => {
     if (isPlay && status === "focus") {
@@ -53,8 +72,10 @@ const TimerProvider = ({ children }: IProps) => {
     if (timerFocus.current === 0) {
       clearInterval(intervalRef.current);
       setIsPlay(false);
-      //stack
+      //status
       setStatus("short");
+      //audio
+      new Audio(alarm).play();
       setStack((prev) => ({ ...prev, current: prev.current + 1 }));
       // reset
       setTimerFocus((prev) => ({ ...prev, current: prev.initial }));
@@ -74,6 +95,8 @@ const TimerProvider = ({ children }: IProps) => {
     if (timerShort.current === 0) {
       clearInterval(intervalRef.current);
       setIsPlay(false);
+      //audio
+      new Audio(alarm).play();
       // reset
       setTimerShort((prev) => ({ ...prev, current: prev.initial }));
       // next
@@ -86,6 +109,8 @@ const TimerProvider = ({ children }: IProps) => {
     if (timerLong.current === 0) {
       clearInterval(intervalRef.current);
       setIsPlay(false);
+      // audio
+      new Audio(alarm).play();
       // reset
       setTimerLong((prev) => ({ ...prev, current: prev.initial }));
       setStack((prev) => ({ ...prev, current: 0 }));
@@ -106,6 +131,9 @@ const TimerProvider = ({ children }: IProps) => {
         timerFocus,
         timerShort,
         timerLong,
+        setTimerFocus,
+        setTimerLong,
+        setTimerShort,
       }}
     >
       {children}

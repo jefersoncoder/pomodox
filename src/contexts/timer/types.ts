@@ -18,6 +18,9 @@ export interface ITimerContext {
   timerFocus: ITimer;
   timerShort: ITimer;
   timerLong: ITimer;
+  setTimerFocus: Dispatch<SetStateAction<ITimer>>;
+  setTimerShort: Dispatch<SetStateAction<ITimer>>;
+  setTimerLong: Dispatch<SetStateAction<ITimer>>;
 }
 
 export interface IProps {
