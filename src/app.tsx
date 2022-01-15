@@ -12,8 +12,8 @@ function App() {
 
   return (
     <div className="w-screen h-screen">
-      <div className="w-full h-full flex justify-center p-20 bg-app-dark">
-        <div className="h-full flex flex-col  items-center w-80 bg-app-red-500 border-app-red-500 border-[1px] rounded-md">
+      <div className="w-full h-full flex justify-center p-10 bg-app-dark">
+        <div className="h-[504px] flex flex-col  items-center w-80 bg-app-red-500 border-app-red-500 border-[1px] rounded-md">
           <div className="w-full h-16 p-6 text-white text-xl">
             {isPomodoro && (
               <BsFillGearFill

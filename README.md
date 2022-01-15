@@ -43,3 +43,5 @@ or
 ``` bash
 yarn dev
 ```
+
+### css is not really my focus, so there may be bugs related to responsive Design
